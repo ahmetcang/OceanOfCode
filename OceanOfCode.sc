@@ -30,6 +30,7 @@ class Ship(var position: Array[Int], var dir: Char, var id: Int) {
 
   override def toString: String = "Ship [position=" + position.toString + ", dir=" + dir + ", id=" + id + "]"
 
+  //MOVE THE SHIP OF N|E|W|S DIRECTIONS
   def move(cellValues: Array[Array[Char]]): Boolean = {
     val startPosition = this.getPosition
     System.err.println("Actual position before move: " + startPosition(0) + " " + startPosition(1))
@@ -65,16 +66,17 @@ object Player {
     val height: Int = in.nextInt()
     val myId: Int = in.nextInt()
     if (in.hasNextLine) in.nextLine
-
+    //CREATE AN ARRAY 2D TO MAP WIDTH,HEIGHT
     val cellValues = Array.ofDim[Char](width,height)
     for (i <- 0 until height) {
       val line = in.nextLine
       for (j <- 0 until width) {
-        cellValues(j)(i) = line.charAt(j)
+        cellValues(j)(i) = line.charAt(j) //SET MAP
 
 
       }
     }
+    //STARTING AT (0,0)
     var startX = 0
     var startY = 0
     var foundStart = false
@@ -118,6 +120,8 @@ object Player {
       System.err.println(y)
       System.err.println(sonarResult)
       System.err.println(opponentOrders)
+      //CHECK THE SHIP CAN MOVE
+      //IF SHIP CAN MOVE GET DIRECTION
       def canMove: Boolean = myShip.move(cellValues)
       if (canMove) System.out.println("MOVE " + myShip.getDir + " TORPEDO")
       else { // surface mechanism
